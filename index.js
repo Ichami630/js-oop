@@ -83,9 +83,16 @@ class BankAccount{
 
     //get the balance
     getBalance(){console.log(`Your current balance is ${this.#balanace}`)}
+
+    //now we can use setters and getters to access private fields
+    setBalance(x){
+        this.#balanace = x
+    }
 }
 
 const acc = new BankAccount("ichami")
 acc.deposit(100000000)
 acc.getBalance()
 // console.log(acc.#balance); //❌ Error: Private field
+acc.setBalance(200000)
+acc.getBalance()
