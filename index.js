@@ -32,6 +32,7 @@
 
 /*ES6 Classes (modern way) */
 //cleaner and more intuinitive way to use OOP
+//a js class is not an object, it is a template for for JS objects
 class Student {
     constructor(name,age){
         this.name = name;
@@ -41,5 +42,50 @@ class Student {
     greet(){console.log(`Hi, i'm ${this.name}`)}
 }
 //behind the scene, it's still using prototypes
+//when you have a class, you can use the class to create objects
 const s1 = new Student('brandon',6)
 s1.greet()
+
+
+/*inheritance */
+//use the extend keyword to create an inherited class
+class Animal {
+    constructor(name){
+        this.name = name
+    }
+
+    speak(){console.log(`${this.name} makes a sound`)}
+}
+
+class Dog extends Animal {
+    constructor(name,breed){
+        super(name); //calls the parent constructor
+        this.breed = breed;
+    }
+
+    speak(){console.log(`${this.name} barks`)} 
+}
+//inheritance
+const d1 = new Dog("whisky","german-shepherd")
+d1.speak()
+
+/*encapsulation and private fields */
+class BankAccount{
+    #balanace = 0 //private property, not accessible outside the class unless through getters and setter
+    constructor(owner){
+        this.owner = owner
+    }
+
+    deposit(amount){
+        this.#balanace +=amount
+        console.log(`Deposited ${amount}, New balance ${this.#balanace}`)
+    }
+
+    //get the balance
+    getBalance(){console.log(`Your current balance is ${this.#balanace}`)}
+}
+
+const acc = new BankAccount("ichami")
+acc.deposit(100000000)
+acc.getBalance()
+// console.log(acc.#balance); //❌ Error: Private field
