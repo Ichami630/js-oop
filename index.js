@@ -1,98 +1,37 @@
-//this is what we call a factory function
-// function createCircle(radius){
-//     return {
-//         radius,
-//         draw: function (){
-//             console.log("draw")
-//         }
-//     }
-// }
-
-// const circle = createCircle(1)
-// circle.draw()
-
-// //constructor function 
-// function Person(name, age){
-//     this.name = name;
-//     this.age = age;
-//     this.greet = function (){
-//         console.log(`Hey ${this.name} you are ${this.age} years old`)
-//     }
-//     //prototype and inheritance
-//     //methods defined on the prototypes are shared on all instances
-//     Person.prototype.sayHi = () =>{
-//         console.log(`Hi ${this.name}`)    
-//     }
-//     //saves memory because methods aren't duplicated for every object
-// }
-
-// const p1 = new Person("ichami",10)
-// p1.greet()
-// p1.sayHi()
-
-/*ES6 Classes (modern way) */
-//cleaner and more intuinitive way to use OOP
-//a js class is not an object, it is a template for for JS objects
-class Student {
-    constructor(name,age){
+//oop with type safety implementation
+var Member = /** @class */ (function () {
+    function Member(name, age) {
         this.name = name;
         this.age = age;
     }
-
-    greet(){console.log(`Hi, i'm ${this.name}`)}
-}
-//behind the scene, it's still using prototypes
-//when you have a class, you can use the class to create objects
-const s1 = new Student('brandon',6)
-s1.greet()
-
-
-/*inheritance */
-//use the extend keyword to create an inherited class
-class Animal {
-    constructor(name){
-        this.name = name
+    Member.prototype.greet = function () {
+        console.log("Hello, ".concat(this.name, " is ").concat(this.age, " years old"));
+    };
+    return Member;
+}());
+var m1 = new Member("ichami", 10);
+m1.greet();
+//access modifiers in typescript
+var BankAcc = /** @class */ (function () {
+    function BankAcc(owner) {
+        this.owner = owner;
+        this.balance = 0;
+        this.owner = owner;
     }
-
-    speak(){console.log(`${this.name} makes a sound`)}
-}
-
-class Dog extends Animal {
-    constructor(name,breed){
-        super(name); //calls the parent constructor
-        this.breed = breed;
-    }
-
-    speak(){console.log(`${this.name} barks`)} 
-}
-//inheritance
-const d1 = new Dog("whisky","german-shepherd")
-d1.speak()
-
-/*encapsulation and private fields */
-class BankAccount{
-    #balanace = 0 //private property, not accessible outside the class unless through getters and setter
-    constructor(owner){
-        this.owner = owner
-    }
-
-    deposit(amount){
-        this.#balanace +=amount
-        console.log(`Deposited ${amount}, New balance ${this.#balanace}`)
-    }
-
-    //get the balance
-    getBalance(){console.log(`Your current balance is ${this.#balanace}`)}
-
-    //now we can use setters and getters to access private fields
-    setBalance(x){
-        this.#balanace = x
-    }
-}
-
-const acc = new BankAccount("ichami")
-acc.deposit(100000000)
-acc.getBalance()
-// console.log(acc.#balance); //❌ Error: Private field
-acc.setBalance(200000)
-acc.getBalance()
+    BankAcc.prototype.deposit = function (amount) {
+        this.balance += amount;
+        console.log("You just deposited ".concat(amount, "$ and your new balance is ").concat(this.balance, "$"));
+    };
+    //getters and setters to access and call private properties out of class
+    BankAcc.prototype.setBalance = function (x) {
+        this.balance = x;
+    };
+    BankAcc.prototype.getBalance = function () {
+        return this.balance;
+    };
+    return BankAcc;
+}());
+var acc2 = new BankAcc("ichami");
+acc2.deposit(200);
+acc2.setBalance(5000);
+console.log(acc2.getBalance());
