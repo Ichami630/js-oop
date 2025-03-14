@@ -44,3 +44,20 @@ const acc2 = new BankAcc("ichami")
 acc2.deposit(200)
 acc2.setBalance(5000)
 console.log(acc2.getBalance())
+
+//interface implementation
+interface Person {
+    name: string;
+    age: number;
+    greet(): void;
+}
+
+class Developer implements Person{
+    constructor(public name: string,public age: number){}
+    greet():void{
+        console.log(`Hi ${this.name}`)
+    }
+}
+
+const dev1 = new Developer("ichami",10)
+dev1.greet()

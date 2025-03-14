@@ -35,3 +35,15 @@ var acc2 = new BankAcc("ichami");
 acc2.deposit(200);
 acc2.setBalance(5000);
 console.log(acc2.getBalance());
+var Developer = /** @class */ (function () {
+    function Developer(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    Developer.prototype.greet = function () {
+        console.log("Hi ".concat(this.name));
+    };
+    return Developer;
+}());
+var dev1 = new Developer("ichami", 10);
+dev1.greet();
